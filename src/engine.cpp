@@ -23,7 +23,9 @@ void Engine::initVulkan() {
 }
 
 void Engine::cleanup() {
-    for (auto imageView : swapChainImageViews) vkDestroyImageView(device, imageView, nullptr);
+    for (auto imageView : swapChainImageViews)
+        vkDestroyImageView(device, imageView, nullptr);
+
     vkDestroySwapchainKHR(device, swapChain, nullptr);
     vkDestroyDevice(device, nullptr);
     if (enableValidationLayers) DestroyDebugUtilsMessengerEXT(instance, debugMessenger, nullptr);
