@@ -8,8 +8,15 @@
 #include <stdexcept>
 #include <cstdlib>
 #include <vector>
+#include <optional>
 
 #include "window.h"
+
+struct QueueFamilyIndices {
+	std::optional<uint32_t> graphicsFamily;
+	bool isComplete() { return graphicsFamily.has_value(); }
+};
+
 
 const std::vector<const char*> validationLayers = {
 	"VK_LAYER_KHRONOS_validation"
@@ -43,26 +50,27 @@ public:
 
 	void init();
 	void cleanup();
-
 	void run();
 
 private:
-
 	GLFWwindow* window;
+
 	VkInstance instance;
 	VkDebugUtilsMessengerEXT debugMessenger;
-	VkPhysicalDevice physicalDevice = VK_NULL_HANDLE;
+
+	VkPhysicalDevice physicalDevice;
+	VkDevice device;
 
 	void initVulkan();
 
 	// instance funcs
 	void createInstance();
-	bool checkValidationLayerSupport();
-	std::vector<const char*> getRequiredExtensions();
 
-	// device funcs
+	// device/queue funcs
 	void selectPhysicalDevice();
 	bool isDeviceSuitable(VkPhysicalDevice device);
+	QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device);
+	void createLogicalDevice();
 
 	// debug messenger funcs
 	void populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT& createInfo);
@@ -72,5 +80,9 @@ private:
 		VkDebugUtilsMessageTypeFlagsEXT messageType,
 		const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData,
 		void* pUserData);
+
+	// helpers
+	bool checkValidationLayerSupport();
+	std::vector<const char*> getRequiredExtensions();
 
 };

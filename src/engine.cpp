@@ -15,6 +15,7 @@ void Engine::initVulkan() {
     createInstance();
     setupDebugMessenger();
     selectPhysicalDevice();
+    createLogicalDevice();
 }
 
 void Engine::cleanup() {
@@ -62,37 +63,7 @@ void Engine::createInstance() {
     }
 }
 
-bool Engine::checkValidationLayerSupport() {
-    uint32_t layerCount;
-    vkEnumerateInstanceLayerProperties(&layerCount, nullptr);
-
-    std::vector<VkLayerProperties> availableLayers(layerCount);
-    vkEnumerateInstanceLayerProperties(&layerCount, availableLayers.data());
-
-    for (const char* layerName : validationLayers) {
-        bool layerFound = false;
-        for (const auto& layerProperties : availableLayers) {
-            if (strcmp(layerName, layerProperties.layerName) == 0) {
-                layerFound = true;
-                break;
-            }
-        }
-        if (!layerFound) return false;
-    }
-    return true;
-}
-
-std::vector<const char*> Engine::getRequiredExtensions() {
-    uint32_t glfwExtCount = 0;
-    const char** glfwExts = glfwGetRequiredInstanceExtensions(&glfwExtCount);
-
-    std::vector<const char*> exts(glfwExts, glfwExts + glfwExtCount);
-    if (enableValidationLayers) exts.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
-
-    return exts;
-}
-
-// device funcs
+// device/queue funcs
 
 void Engine::selectPhysicalDevice() {
     uint32_t deviceCount = 0;
@@ -118,10 +89,38 @@ void Engine::selectPhysicalDevice() {
 }
 
 bool Engine::isDeviceSuitable(VkPhysicalDevice device) {
-    VkPhysicalDeviceProperties deviceProperties;
-    VkPhysicalDeviceFeatures deviceFeatures;
-    vkGetPhysicalDeviceProperties(device, &deviceProperties);
-    vkGetPhysicalDeviceFeatures(device, &deviceFeatures);
+    QueueFamilyIndices indices = findQueueFamilies(device);
+    return indices.isComplete();
+}
+
+QueueFamilyIndices Engine::findQueueFamilies(VkPhysicalDevice device) {
+    QueueFamilyIndices indices;
+    uint32_t queueFamilyCount = 0;
+    vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, nullptr);
+
+    std::vector<VkQueueFamilyProperties> queueFamilies(queueFamilyCount);
+    vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, queueFamilies.data());
+
+    for (int i = 0; i < queueFamilies.size(); i++) {
+        if (queueFamilies[i].queueFlags & VK_QUEUE_GRAPHICS_BIT)
+            indices.graphicsFamily = i;
+
+        if (indices.isComplete()) break;
+    }
+
+    return indices;
+}
+
+void Engine::createLogicalDevice() {
+    QueueFamilyIndices indices = findQueueFamilies(physicalDevice);
+
+    VkDeviceQueueCreateInfo queueCreateInfo = {};
+    queueCreateInfo.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
+    queueCreateInfo.queueFamilyIndex = indices.graphicsFamily.value();
+    queueCreateInfo.queueCount = 1;
+
+    float queuePriority = 1.0f;
+    queueCreateInfo.pQueuePriorities = &queuePriority;
 
 
 }
@@ -144,10 +143,8 @@ void Engine::populateDebugMessengerCreateInfo(VkDebugUtilsMessengerCreateInfoEXT
 
 void Engine::setupDebugMessenger() {
     if (!enableValidationLayers) return;
-
     VkDebugUtilsMessengerCreateInfoEXT createInfo;
     populateDebugMessengerCreateInfo(createInfo);
-
     if (CreateDebugUtilsMessengerEXT(instance, &createInfo, nullptr, &debugMessenger) != VK_SUCCESS) {
         fmt::print("error: {}\n", "failed to set up debug messenger");
         exit(0);
@@ -161,4 +158,33 @@ VKAPI_ATTR VkBool32 VKAPI_CALL Engine::debugCallback(
     void* pUserData) {
     fmt::print("validation layer: {}\n", pCallbackData->pMessage);
     return VK_FALSE;
+}
+
+// helpers
+
+bool Engine::checkValidationLayerSupport() {
+    uint32_t layerCount;
+    vkEnumerateInstanceLayerProperties(&layerCount, nullptr);
+    std::vector<VkLayerProperties> availableLayers(layerCount);
+    vkEnumerateInstanceLayerProperties(&layerCount, availableLayers.data());
+
+    for (const char* layerName : validationLayers) {
+        bool layerFound = false;
+        for (const auto& layerProperties : availableLayers) {
+            if (strcmp(layerName, layerProperties.layerName) == 0) {
+                layerFound = true;
+                break;
+            }
+        }
+        if (!layerFound) return false;
+    }
+    return true;
+}
+
+std::vector<const char*> Engine::getRequiredExtensions() {
+    uint32_t glfwExtCount = 0;
+    const char** glfwExts = glfwGetRequiredInstanceExtensions(&glfwExtCount);
+    std::vector<const char*> exts(glfwExts, glfwExts + glfwExtCount);
+    if (enableValidationLayers) exts.push_back(VK_EXT_DEBUG_UTILS_EXTENSION_NAME);
+    return exts;
 }
