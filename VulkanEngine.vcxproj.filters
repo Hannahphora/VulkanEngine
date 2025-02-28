@@ -1,0 +1,111 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="ThirdParty">
+      <UniqueIdentifier>{d4bbbe25-d42a-4d1c-969e-ef5ca338743e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\imgui">
+      <UniqueIdentifier>{8d452aff-7aaa-4c12-9c65-058fa891aa7d}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\engine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="thirdparty\include\imgui\imgui.cpp">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="thirdparty\include\imgui\imgui_demo.cpp">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="thirdparty\include\imgui\imgui_draw.cpp">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="thirdparty\include\imgui\imgui_tables.cpp">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="thirdparty\include\imgui\imgui_widgets.cpp">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="thirdparty\include\imgui\backends\imgui_impl_glfw.cpp">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="thirdparty\include\imgui\backends\imgui_impl_vulkan.cpp">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="src\window.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\vk_descriptors.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\vk_initialisers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\renderer\vk_pipelines.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="thirdparty\include\imgui\imconfig.h">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="thirdparty\include\imgui\imgui.h">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="thirdparty\include\imgui\imgui_internal.h">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="thirdparty\include\imgui\imstb_rectpack.h">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="thirdparty\include\imgui\imstb_textedit.h">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="thirdparty\include\imgui\imstb_truetype.h">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="thirdparty\include\imgui\backends\imgui_impl_glfw.h">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="thirdparty\include\imgui\backends\imgui_impl_vulkan.h">
+      <Filter>ThirdParty\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="src\utility.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\window.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\vk_descriptors.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\vk_initialisers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\vk_pipelines.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\renderer\vk_types.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>

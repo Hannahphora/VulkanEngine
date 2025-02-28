@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{3afd571c-761c-4431-92c1-fd3b8ff0c781}</ProjectGuid>
+    <RootNamespace>VulkanEngine</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v143</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <OutDir>$(SolutionDir)build\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)build\$(Configuration)\intermediate\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <OutDir>$(SolutionDir)build\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)build\$(Configuration)\intermediate\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\VulkanSDK\1.3.296.0\Include\;$(ProjectDir)thirdparty\include\;$(ProjectDir)thirdparty\include\imgui\;$(ProjectDir)thirdparty\include\imgui\backends\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <PreprocessorDefinitions>_UNICODE;UNICODE;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\VulkanSDK\1.3.296.0\Lib\;$(ProjectDir)thirdparty\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>vulkan-1.lib;glfw3.lib;assimp-vc143-mt.lib;fmt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /Y /q "$(SolutionDir)thirdparty\lib\native\" "$(OutDir)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>C:\VulkanSDK\1.3.296.0\Include\;$(ProjectDir)thirdparty\include\;$(ProjectDir)thirdparty\include\imgui\;$(ProjectDir)thirdparty\include\imgui\backends\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
+      <PreprocessorDefinitions>_UNICODE;UNICODE;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\VulkanSDK\1.3.296.0\Lib\;$(ProjectDir)thirdparty\lib\;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>vulkan-1.lib;glfw3.lib;assimp-vc143-mt.lib;fmt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>xcopy /Y /q "$(SolutionDir)thirdparty\lib\native\" "$(OutDir)"</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="src\engine.cpp" />
+    <ClCompile Include="src\main.cpp" />
+    <ClCompile Include="src\renderer\vk_descriptors.cpp" />
+    <ClCompile Include="src\renderer\vk_initialisers.cpp" />
+    <ClCompile Include="src\renderer\vk_pipelines.cpp" />
+    <ClCompile Include="src\window.cpp" />
+    <ClCompile Include="thirdparty\include\imgui\backends\imgui_impl_glfw.cpp" />
+    <ClCompile Include="thirdparty\include\imgui\backends\imgui_impl_vulkan.cpp" />
+    <ClCompile Include="thirdparty\include\imgui\imgui.cpp" />
+    <ClCompile Include="thirdparty\include\imgui\imgui_demo.cpp" />
+    <ClCompile Include="thirdparty\include\imgui\imgui_draw.cpp" />
+    <ClCompile Include="thirdparty\include\imgui\imgui_tables.cpp" />
+    <ClCompile Include="thirdparty\include\imgui\imgui_widgets.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="src\engine.h" />
+    <ClInclude Include="src\renderer\vk_descriptors.h" />
+    <ClInclude Include="src\renderer\vk_initialisers.h" />
+    <ClInclude Include="src\renderer\vk_pipelines.h" />
+    <ClInclude Include="src\renderer\vk_types.h" />
+    <ClInclude Include="src\utility.h" />
+    <ClInclude Include="src\window.h" />
+    <ClInclude Include="thirdparty\include\imgui\backends\imgui_impl_glfw.h" />
+    <ClInclude Include="thirdparty\include\imgui\backends\imgui_impl_vulkan.h" />
+    <ClInclude Include="thirdparty\include\imgui\imconfig.h" />
+    <ClInclude Include="thirdparty\include\imgui\imgui.h" />
+    <ClInclude Include="thirdparty\include\imgui\imgui_internal.h" />
+    <ClInclude Include="thirdparty\include\imgui\imstb_rectpack.h" />
+    <ClInclude Include="thirdparty\include\imgui\imstb_textedit.h" />
+    <ClInclude Include="thirdparty\include\imgui\imstb_truetype.h" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
