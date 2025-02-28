@@ -4,7 +4,7 @@ GLFWwindow* Window::init(int width, int height, const char* title) {
 
 	if (!glfwInit()) {
 		fmt::print("error: {}\n", "failed to init glfw");
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 
 	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
@@ -14,7 +14,7 @@ GLFWwindow* Window::init(int width, int height, const char* title) {
 	if (!wnd) {
 		fmt::print("error: {}\n", "failed to create window");
 		glfwTerminate();
-		exit(1);
+		exit(EXIT_FAILURE);
 	}
 
 	return wnd;

@@ -98,9 +98,6 @@
   <ItemGroup>
     <ClCompile Include="src\engine.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="src\renderer\vk_descriptors.cpp" />
-    <ClCompile Include="src\renderer\vk_initialisers.cpp" />
-    <ClCompile Include="src\renderer\vk_pipelines.cpp" />
     <ClCompile Include="src\window.cpp" />
     <ClCompile Include="thirdparty\include\imgui\backends\imgui_impl_glfw.cpp" />
     <ClCompile Include="thirdparty\include\imgui\backends\imgui_impl_vulkan.cpp" />
@@ -112,9 +109,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\engine.h" />
-    <ClInclude Include="src\renderer\vk_descriptors.h" />
-    <ClInclude Include="src\renderer\vk_initialisers.h" />
-    <ClInclude Include="src\renderer\vk_pipelines.h" />
     <ClInclude Include="src\renderer\vk_types.h" />
     <ClInclude Include="src\utility.h" />
     <ClInclude Include="src\window.h" />
